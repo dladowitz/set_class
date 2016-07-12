@@ -3,7 +3,7 @@ require 'pry'
 class DSet
   def initialize(array = [])
     @hash = Hash.new(false)
-    array.each { |element| @hash[element] = true }
+    self.merge(array)
   end
 
   def length
@@ -31,22 +31,22 @@ class DSet
   end
 
   def has_subset?(collection)
-    collection.each do |element|
-      return false unless include? element
-    end
-
-    return true
+    is_subset_of(collection, self)
   end
 
   def in_superset?(collection)
-    self.each do |element|
-      return false unless collection.include? element
+    is_subset_of(self, collection)
+  end
+
+  private
+
+  def is_subset_of(subset, superset)
+    subset.each do |element|
+      return false unless superset.include? element
     end
 
     return true
   end
-
-  private
   #
   # def merge_array(collection)
   #   collection.each { |element| add(element) }

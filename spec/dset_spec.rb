@@ -28,6 +28,12 @@ describe DSet do
         @dset.add "a"
         expect(@dset.length).to eq 1
       end
+
+      it "does not add a second element with the same value" do
+        @dset.add "a"
+        @dset.add "a"
+        expect(@dset.length).to eq 1
+      end
     end
 
     describe "#include?" do

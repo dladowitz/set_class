@@ -46,6 +46,37 @@ describe DSet do
           @dset.delete "a"
           expect(@dset.includes? "a").to be false
         end
+
+        it "does nothing if an item is not in the set" do
+          @dset.delete "a"
+          expect(@dset.includes? "a").to be false
+        end
+      end
+
+      context "with elements already in the set" do
+        before { @dset = DSet.new(["a", "b", "c"]) }
+
+        describe "#each" do
+          it "returns acts on each of the elements in the collection" do
+            array = []
+            @dset.each { |element| array << element }
+            expect(array).to match_array ["a", "b", "c"]
+          end
+        end
+
+        describe "#merge" do
+          it "merges in an array of elements" do
+            @dset.merge ["x", "y", "z"]
+            expect(@dset.length).to eq 6
+            expect(@dset.includes? "z").to be true
+          end
+
+          it "merges in another set" do
+            dset2 = DSet.new ["x", "y", "z"]
+            @dset.merge dset2
+            expect(@dset.length).to eq 6
+          end
+        end
       end
     end
 

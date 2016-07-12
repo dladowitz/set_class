@@ -12,4 +12,8 @@ class DSet
     @hash[element] = true
   end
 
+  def includes?(element)
+    @hash[element] ? true : false
+  end
+
 end

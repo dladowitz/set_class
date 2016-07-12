@@ -25,22 +25,26 @@ class DSet
   end
 
   def merge(collection)
-    if collection.is_a? Array
-      merge_array(collection)
-    elsif collection.is_a? DSet
-      merge_dset(collection)
-    else
-      puts "Can only merge Arrays and DSets. Maybe put in a feature request."
+    collection.each { |element| add(element) }
+  end
+
+  def subset?(collection)
+    collection.each do |element|
+      unless includes? element
+        return false
+      end
     end
+
+    return true
   end
 
   private
-
-  def merge_array(collection)
-    collection.each { |element| add(element) }
-  end
-
-  def merge_dset(collection)
-    collection.each { |element| add(element) }
-  end
+  #
+  # def merge_array(collection)
+  #   collection.each { |element| add(element) }
+  # end
+  #
+  # def merge_dset(collection)
+  #   collection.each { |element| add(element) }
+  # end
 end

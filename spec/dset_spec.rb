@@ -77,6 +77,26 @@ describe DSet do
             expect(@dset.length).to eq 6
           end
         end
+
+        describe "#subset?" do
+          it "retuns true when all elements of an array are present" do
+            expect(@dset.subset? ["a", "b"]).to be true
+          end
+
+          it "retuns true when all elements of a set are present" do
+            dset2 = Set.new ["a", "b"]
+            expect(@dset.subset? dset2).to be true
+          end
+
+          it "returns false when an element from the array is missing from the set" do
+            expect(@dset.subset? ["x", "b"]).to be false
+          end
+
+          it "retuns true when an element of a set is missing" do
+            dset2 = Set.new ["x", "b"]
+            expect(@dset.subset? dset2).to be false
+          end
+        end
       end
     end
 

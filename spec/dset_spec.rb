@@ -24,19 +24,27 @@ describe DSet do
 
       describe "#add" do
         it "correcly adds elements to the set" do
-          @dset.add("d")
+          @dset.add "a"
           expect(@dset.length).to eq 1
         end
       end
 
       describe "#includes?" do
         it "returns true if an element is in the set" do
-          @dset.add("d")
-          expect(@dset.includes? "d").to be true
+          @dset.add "a"
+          expect(@dset.includes? "a").to be true
         end
 
         it "returns false if an element is not in the set" do
-          expect(@dset.includes? "e").to be false
+          expect(@dset.includes? "z").to be false
+        end
+      end
+
+      describe "#delete" do
+        it "deletes an item if its in the set" do
+          @dset.add "a"
+          @dset.delete "a"
+          expect(@dset.includes? "a").to be false
         end
       end
     end

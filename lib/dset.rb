@@ -16,4 +16,7 @@ class DSet
     @hash[element] ? true : false
   end
 
+  def delete(element)
+    @hash[element] = false
+  end
 end
